@@ -54,8 +54,8 @@
         (war)
         (target :dir #{"target"})))
 
-(deftask build-jar
-  "Builds a standalone jar."
+(deftask build-jar ;; TODO make it work
+  "Builds a standalone jar. Doesn't work"
   []
   (comp (aot :namespace #{'blame.core})
         (hoplon)
