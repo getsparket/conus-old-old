@@ -9,7 +9,8 @@
 (ns clj.blame.core
   (:require
     [blame.handler          :as handler]
-    [ring.adapter.jetty             :refer [run-jetty]]))
+    [ring.adapter.jetty             :refer [run-jetty]]
+    [clojure.java.jdbc :as sql]))
 
 (def server (atom nil))
 
@@ -20,3 +21,8 @@
   "Start castra demo server (port 33333)."
   [port public-path]
   (swap! server #(or % (app port public-path))))
+
+
+(defn -main [& args]
+  (require 'my-namespace)
+  (apply (resolve 'my-namespace/-main) args))

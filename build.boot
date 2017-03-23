@@ -12,11 +12,16 @@
                   [adzerk/boot-cljs-repl     "0.3.3"]
                   [com.cemerick/piggieback   "0.2.1"  :scope "test"]
                   [weasel                    "0.7.0"      :scope "test"]
-                  [org.clojure/tools.nrepl   "0.2.12" :scope "test"]]
+                  [org.clojure/tools.nrepl   "0.2.12" :scope "test"]
+                  [org.clojure/java.jdbc "0.7.0-alpha2"]
+                  [samestep/boot-refresh "0.1.0"]
+                  ]
+
   :resource-paths #{"resources" "src/clj"}
   :source-paths   #{"src/cljs" "src/hl"})
 
 (require
+ '[clojure.java.jdbc :as sql]
   '[adzerk.boot-cljs      :refer [cljs]]
   '[adzerk.boot-reload    :refer [reload]]
   '[hoplon.boot-hoplon    :refer [hoplon prerender]]
