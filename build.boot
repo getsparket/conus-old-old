@@ -14,6 +14,7 @@
                   [weasel                    "0.7.0"      :scope "test"]
                   [org.clojure/tools.nrepl   "0.2.12" :scope "test"]
                   [org.clojure/java.jdbc "0.7.0-alpha2"]
+                  [org.postgresql/postgresql "9.4-1201-jdbc41"]
                   [samestep/boot-refresh "0.1.0"]
                   ]
 
@@ -22,10 +23,10 @@
 
 (require
  '[clojure.java.jdbc :as sql]
-  '[adzerk.boot-cljs      :refer [cljs]]
-  '[adzerk.boot-reload    :refer [reload]]
-  '[hoplon.boot-hoplon    :refer [hoplon prerender]]
-  '[pandeiro.boot-http    :refer [serve]])
+ '[adzerk.boot-cljs      :refer [cljs]]
+ '[adzerk.boot-reload    :refer [reload]]
+ '[hoplon.boot-hoplon    :refer [hoplon prerender]]
+ '[pandeiro.boot-http    :refer [serve]])
 
 (deftask dev
   "Build blame for local development."
@@ -59,7 +60,7 @@
         (war)
         (target :dir #{"target"})))
 
-(deftask build-jar ;; TODO make it work
+#_(deftask build-jar ;; TODO make it work
   "Builds a standalone jar. Doesn't work"
   []
   (comp (aot :namespace #{'blame.core})

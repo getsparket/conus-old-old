@@ -5,15 +5,15 @@
    [javelin.core]
    [castra.core :refer [mkremote]]))
 
-(defc state nil)
+(defc state {})
 (defc error nil)
 (defc loading [])
 
-(defc= random-number  (get state :random))
-(defc= session-number (get state :session))
-
 (def get-state
-  (mkremote 'blame.api/get-state state error loading))
+  (mkremote 'blame.api/get-only-thing state error loading))
+
+(def new-owner
+  (mkremote 'blame.api/new-owner-for-only-thing state error loading))
 
 (defn init []
   (get-state)

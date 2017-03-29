@@ -1,12 +1,30 @@
 (page "index.html"
-  (:require
-    [blame.rpc :as rpc]))
+      (:require
+       [hoplon.storage-atom :refer [local-storage]]
+       [blame.rpc :as rpc]))
 
 (rpc/init)
 
+(defc= thing-info rpc/state)
+(defc= id (get thing-info :id))
+(defc= owner (get thing-info :owner))
+(defc= name (get thing-info :name))
+(defc= price (get thing-info :price))
+(defc= description (get thing-info :description))
+
+(def update! #(rpc/new-owner {:owner %1}))
+
 (html
   (head
-    (link :href "app.css" :rel "stylesheet"))
+    (link :rel "stylesheet" :type "text/css" :href "main.css"))
   (body
-    (h1 (text "Hello, Hoplon and Castra!"))
-    (pre (text "session = ~{rpc/session-number}, random = ~{rpc/random-number}"))))
+    (h1 (text "fool"))
+
+    (p :style "color:gray;font:14px Georgia;"
+       (text "(Id: ~{id}) name of thing ~{name}, owner: ~{owner}, price: ~{price}"))
+
+    (let [new-owner (cell "")]
+      (form :submit #(update! @new-owner)  ; edit and submit form to load record
+        (p (label "owner: ")
+          (input :type "text" :value owner :change #(reset! new-owner @%)))
+        (p (button :type "submit" "Update user information"))))))
