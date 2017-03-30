@@ -13,6 +13,7 @@
 (defc= description (get thing-info :description))
 
 (def update! #(rpc/new-owner {:owner %1}))
+(def add-new! #(rpc/add-new {:id %1 :owner %2 :price %3 :description %4 :name %5}))
 
 (html
   (head
@@ -22,9 +23,34 @@
 
     (p :style "color:gray;font:14px Georgia;"
        (text "(Id: ~{id}) name of thing ~{name}, owner: ~{owner}, price: ~{price}"))
-
     (let [new-owner (cell "")]
       (form :submit #(update! @new-owner)  ; edit and submit form to load record
         (p (label "owner: ")
           (input :type "text" :value owner :change #(reset! new-owner @%)))
-        (p (button :type "submit" "Update user information"))))))
+        (p (button :type "submit" "Update user information"))))
+    (p :style "color:blue"
+       (text "pick a thing by id"))
+
+    (let [selected-id (cell "")]
+      (form :submit #(get-thing! @selected-id)  ; edit and submit form to load record
+            (p (label "owner: ")
+               (input :type "text" :value "" :change #(reset! selected-id @%)))
+            (p (button :type "submit" "Update user information"))))
+    (let [new-owner (cell "")
+          new-id (cell "")
+          new-price (cell "")
+          new-description (cell "")
+          new-name (cell "")]
+      (form :submit #(add-new! @new-id @new-owner @new-price @new-description @new-name)  ; edit and submit form to load record
+            (p (label "id: ")
+               (input :type "text" :value "" :change #(reset! new-id @%)))
+            (p (label "owner: ")
+               (input :type "text" :value "" :change #(reset! new-owner @%)))
+            (p (label "price: ")
+               (input :type "text" :value "" :change #(reset! new-price @%)))
+            (p (label "description: ")
+               (input :type "text" :value "" :change #(reset! new-description @%)))
+            (p (label "name of thing: ")
+               (input :type "text" :value "" :change #(reset! new-name @%)))
+            (p (button :type "submit" "Update user information"))))
+    ))
