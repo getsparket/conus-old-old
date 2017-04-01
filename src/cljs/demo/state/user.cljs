@@ -26,3 +26,7 @@
 
 (def insert-user
   (mkremote 'demo.api.user/insert-user state error loading))
+
+(defn init []
+  (list-of-users)
+  (js/setInterval list-of-users 1000))
