@@ -3,8 +3,14 @@
         [demo.state.user :as rpc]))
 
 (rpc/get-random-user)
+(rpc/list-of-users)
 
 (defc= user-info rpc/state)
+(defc= users rpc/users)
+(defc= users-error rpc/error)
+(defc= users-loading rpc/loading)
+
+
 
 (defc= record-id (get user-info :db/id))
 (defc= first-name (get user-info :person/first-name))
@@ -20,7 +26,7 @@
   (body
     (h1 (text "Hello, Hoplon, Castra and Datomic Free World!"))
 
-    (p (text "This demo seeds Datomic with 256 user records. Here a random user record is pulled from Datomic on page load:"))
+    (p (text "here is the list of users ~{users} errors ~{users-error} ~{users-loading}"))
 
     (p (text "ADD A NEW USER HERE"))
 

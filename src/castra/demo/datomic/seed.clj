@@ -38,10 +38,10 @@
               :person/first-name first
               :person/last-name  last
               :person/email      email}]
-       @(d/transact conn (conj [] data))))
+    @(d/transact conn (conj [] data))))
 
 (defn seed-db [uri]
   (if-let [db (d/create-database uri)]
     (let [conn (d/connect uri)]
       (create-schema conn)
-      (doall (map #(insert-seed-data conn %) (range 256))))))
+      (doall (map #(insert-seed-data conn %) (range 8))))))
