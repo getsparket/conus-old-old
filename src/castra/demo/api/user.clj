@@ -1,6 +1,6 @@
 (ns demo.api.user
     (:require
-      [demo.datomic.api :refer [fetch-random-record fetch-record update-record!]]
+      [demo.datomic.api :refer [fetch-random-record fetch-record update-record! insert-record!]]
       [castra.core :refer [defrpc]]))
 
 (defrpc get-random-user []
@@ -11,4 +11,8 @@
 
 (defrpc update-user [user-data]
   {:rpc/pre [(update-record! user-data)]}
+  (fetch-record (:db/id user-data)))
+
+(defrpc insert-user [user-data]
+  {:rpc/pre [(insert-record! user-data)]}
   (fetch-record (:db/id user-data)))

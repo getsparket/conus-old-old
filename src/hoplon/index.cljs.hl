@@ -12,6 +12,7 @@
 (defc= emadd (get user-info :person/email))
 
 (def update! #(rpc/update-user {:db/id %1 :person/first-name %2 :person/last-name %3}))
+(def insert! #(rpc/insert-user { :person/first-name %1 :person/last-name %2}))
 
 (html
   (head
@@ -20,6 +21,17 @@
     (h1 (text "Hello, Hoplon, Castra and Datomic Free World!"))
 
     (p (text "This demo seeds Datomic with 256 user records. Here a random user record is pulled from Datomic on page load:"))
+
+    (p (text "ADD A NEW USER HERE"))
+
+    (let [fname (cell "")
+          lname (cell "")]
+      (form :submit #(insert! @fname @lname)  ; edit and submit form to load record
+            (p (label "First Name: ")
+               (input :type "text" :value "" :change #(reset! fname @%)))
+            (p (label "Last Name: ")
+               (input :type "text" :value "" :change #(reset! lname @%)))
+            (p (button :type "submit" "Update user information"))))
 
     (p :style "color:gray;font:14px Georgia;"
        (text "(Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
@@ -35,5 +47,4 @@
           (input :type "text" :value last-name :change #(reset! lname @%)))
         (p (button :type "submit" "Update user information"))))
 
-    (p :style "color:gray;font:12px Verdana;"
-       (text "There is no code to manage AJAX promises, responses from the server and DOM updates are just cells updates"))))
+    ))
