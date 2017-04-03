@@ -8,26 +8,10 @@
 (defc= users-error rpc/error)
 (defc= users-loading rpc/loading)
 
-
-
-
-(def insert! #(rpc/insert-user { :person/first-name %1 :person/last-name %2}))
-
 (html
   (head
     (link :rel "stylesheet" :type "text/css" :href "main.css"))
   (body
-    (h1 (text "attempt at email app"))
+    (h1 (text "attempt at thing app"))
 
-    (p (text "here is the list of users ~{users} errors ~{users-error} ~{users-loading}"))
-
-    (p (text "ADD A NEW USER HERE"))
-
-    (let [fname (cell "")
-          lname (cell "")]
-      (form :submit #(insert! @fname @lname)  ; edit and submit form to load record
-            (p (label "First Name: ")
-               (input :type "text" :value "" :change #(reset! fname @%)))
-            (p (label "Last Name: ")
-               (input :type "text" :value "" :change #(reset! lname @%)))
-            (p (button :type "submit" "Update user information"))))))
+    (p (text "here is the list of users ~{users} errors ~{users-error} ~{users-loading}"))))

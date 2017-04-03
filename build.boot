@@ -1,6 +1,8 @@
 (set-env!
   :dependencies '[[adzerk/boot-cljs          "1.7.170-3"]
                   [adzerk/boot-cljs-repl     "0.3.0"]
+                  [cider/cider-nrepl "0.15.0-SNAPSHOT"]
+                  [refactor-nrepl "2.3.0-SNAPSHOT"]
                   [adzerk/boot-reload        "0.5.1"]
                   [compojure                 "1.4.0"]
                   [hoplon/boot-hoplon        "0.1.9"]
