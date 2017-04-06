@@ -17,7 +17,3 @@
 
 (def update-user
   (mkremote 'demo.api.user/update-user state error loading))
-
-(defn init []
-  (get-random-user)
-  (js/setInterval get-random-user 1000))

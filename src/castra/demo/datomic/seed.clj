@@ -24,36 +24,22 @@
                  :db/ident              :person/email
                  :db/valueType          :db.type/string
                  :db/cardinality        :db.cardinality/one
-                 ;; :db/unique             :db.unique/value
+                 :db/unique             :db.unique/value
                  :db/doc                "The email of the person"
                  :db.install/_attribute :db.part/db}]]
 
  @(d/transact conn schema)))
 
-#_(defn insert-seed-data [conn n]
-  (let [first (rand-nth ["Alice" "Bob" "Claire" "Dustin" "Ellen" "Fred" "Georgia"])
-        last (str "Datomic" n)
-        email (str (clojure.string/lower-case first) "." (clojure.string/lower-case last) "@email-server.com")
-        data {:db/id             (d/tempid :db.part/user)
-              :person/first-name first
-              :person/last-name  last
-              :person/email      email}]
-       @(d/transact conn (conj [] data))))
-
 (defn insert-seed-data [conn]
-    (let [data {:db/id             (d/tempid :db.part/user)
-                :person/first-name "mcattt"
-                :person/last-name  "marks"
-                :person/email      "fuckyou@fuckyou.com"}]
-      @(d/transact conn (conj [] data))))
+  (let [data {:db/id             (d/tempid :db.part/user)
+              :person/first-name "mcattt"
+              :person/last-name  "marks"
+              :person/email      "fuckyou@fuckyou.com"}]
+    @(d/transact conn (conj [] data))))
+
 
 (defn seed-db [uri]
   (if-let [db (d/create-database uri)]
     (let [conn (d/connect uri)]
       (create-schema conn)
       (insert-seed-data conn))))
-#_(defn seed-db [uri]
-  (if-let [db (d/create-database uri)]
-    (let [conn (d/connect uri)]
-      (create-schema conn)
-      (doall (map #(insert-seed-data conn %) (range 256))))))

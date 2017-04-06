@@ -5,9 +5,8 @@
                   [refactor-nrepl "2.3.0-SNAPSHOT"]
                   [adzerk/boot-reload        "0.5.1"]
                   [compojure                 "1.4.0"]
-                  [hoplon/boot-hoplon        "0.1.9"]
                   [hoplon/castra             "3.0.0-alpha3"]
-                  [hoplon                    "6.0.0-alpha11"]
+                  [hoplon                    "7.0.0-SNAPSHOT"]
                   [com.cemerick/piggieback   "0.2.1" :scope "test"]
                   [weasel                    "0.7.0" :scope "test"]
                   [org.clojure/tools.nrepl   "0.2.12" :scope "test"]
@@ -19,7 +18,12 @@
                   [pandeiro/boot-http        "0.7.1-SNAPSHOT"]
                   [ring                      "1.4.0"]
                   [ring/ring-defaults        "0.1.5"]
-                  [com.datomic/datomic-free  "0.9.5344"]]
+                  [com.datomic/datomic-pro "0.9.5561"]]
+  :repositories #(conj %
+                       ["my-datomic" {:url "https://my.datomic.com/repo"
+                                      :username "matthewfmarks@gmail.com"
+                                      :password "d145a656-b2c2-498d-b82b-12283d48b178"}])
+
   :source-paths   #{"src/hoplon" "src/castra" "src/cljs"}
   :resource-paths #{"assets"})
 

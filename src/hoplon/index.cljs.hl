@@ -2,7 +2,7 @@
       (:require
         [demo.state.user :as rpc]))
 
-(rpc/init)
+(rpc/get-random-user)
 
 (defc= user-info rpc/state)
 
@@ -22,7 +22,7 @@
     (p (text "This demo seeds Datomic with 256 user records. Here a random user record is pulled from Datomic on page load:"))
 
     (p :style "color:gray;font:14px Georgia;"
-       (text "(Id: ~{user-info}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
+       (text "(Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
 
     (p (text "Update the user record, the data above will be updated and a new email is computed on the server"))
 

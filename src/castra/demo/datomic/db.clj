@@ -7,9 +7,8 @@
 
 ; 12-factor - obtain uri from env
 (def uri (if-let [env-uri (env :datomic-uri)]
-            env-uri
-            "datomic:mem://castra"))
-
+           env-uri
+           "datomic:dev://localhost:4334/castra"))
 ; the connection can be required in other namespaces
 (defstate datomic-conn :start (d/connect uri))
 
