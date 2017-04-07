@@ -3,7 +3,7 @@
     [demo.datomic.db :refer [datomic-conn]]
     [datomic.api :as d]))
 
-(defn- fetch-ids
+(defn fetch-ids
    "Find all the IDs in the database"
    []
    (d/q '[:find ?e :where [?e :person/first-name]] (d/db datomic-conn)))

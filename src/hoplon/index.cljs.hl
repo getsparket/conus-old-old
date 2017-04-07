@@ -12,6 +12,7 @@
 (defc= emadd (get user-info :person/email))
 
 (def update! #(rpc/update-user {:db/id %1 :person/first-name %2 :person/last-name %3}))
+(def insert! #(rpc/insert-user {:person/first-name %1 :person/last-name %2}))
 
 (html
   (head
@@ -24,11 +25,11 @@
     (p :style "color:gray;font:14px Georgia;"
        (text "(Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
 
-    (p (text "Update the user record, the data above will be updated and a new email is computed on the server"))
+    (p (text "INSERT the user record, the data above will be updated and a new email is computed on the server"))
 
     (let [fname (cell "")
           lname (cell "")]
-      (form :submit #(update! @record-id @fname @lname)  ; edit and submit form to load record
+      (form :submit #(insert! @fname @lname)  ; edit and submit form to load record
         (p (label "First Name: ")
           (input :type "text" :value first-name :change #(reset! fname @%)))
         (p (label "Last Name: ")

@@ -17,3 +17,6 @@
 
 (def update-user
   (mkremote 'demo.api.user/update-user state error loading))
+
+(def insert-user
+  (mkremote 'demo.api.user/insert-user state error loading))
