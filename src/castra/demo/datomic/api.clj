@@ -6,7 +6,7 @@
 (defn fetch-ids
    "Find all the IDs in the database"
    []
-   (d/q '[:find ?e :where [?e :person/first-name]] (d/db datomic-conn)))
+   (d/q '[:find ?e :where [?e :person/name]] (d/db datomic-conn)))
 
 (defn- random-id
   "Choose a random ID from the database"
@@ -27,17 +27,14 @@
 (defn update-record!
   "Update the record and change a property on the server to show that we also did something!"
   [user-data]
-  (let [email (str (clojure.string/lower-case (:person/first-name user-data)) "."
-                   (clojure.string/lower-case (:person/last-name user-data)) "@email-server.com")
-    data (assoc user-data :person/email email)
+  (let [email (str (clojure.string/lower-case (:person/name user-data)) "."
+                   (clojure.string/lower-case (:thing/name user-data)) "@email-server.com")
+    data (assoc user-data :thing/price email)
     noop (println "Updating with " data)]
    @(d/transact datomic-conn (conj [] data))))
 
 (defn insert-record!
   "doo doo"
   [user-data]
-  (let [email (str (clojure.string/lower-case (:person/first-name user-data)) "."
-                   (clojure.string/lower-case (:person/last-name user-data)) "@added-by-UI.com")
-        data (assoc user-data :person/email email)
-        noop (println "Updating with " data)]
-    @(d/transact datomic-conn (conj [] data))))
+  (let [noop (println "Updating with " user-data)]
+    @(d/transact datomic-conn (conj [] user-data))))

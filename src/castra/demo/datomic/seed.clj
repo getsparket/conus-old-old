@@ -7,21 +7,21 @@
   "Create a Datomic schema (simple example)"
   [conn]
   (let [schema [{:db/id                 #db/id[:db.part/db]
-                 :db/ident              :person/first-name
+                 :db/ident              :person/name
                  :db/valueType          :db.type/string
                  :db/cardinality        :db.cardinality/one
                  :db/doc                "The first name of the person"
                  :db.install/_attribute :db.part/db}
 
                 {:db/id                 #db/id[:db.part/db]
-                 :db/ident              :person/last-name
+                 :db/ident              :thing/name
                  :db/valueType          :db.type/string
                  :db/cardinality        :db.cardinality/one
                  :db/doc                "The last name of the person"
                  :db.install/_attribute :db.part/db}
 
                 {:db/id                 #db/id[:db.part/db]
-                 :db/ident              :person/email
+                 :db/ident              :thing/price
                  :db/valueType          :db.type/string
                  :db/cardinality        :db.cardinality/one
                  :db/unique             :db.unique/value
@@ -32,9 +32,9 @@
 
 (defn insert-seed-data [conn]
   (let [data {:db/id             (d/tempid :db.part/user)
-              :person/first-name "mcattt"
-              :person/last-name  "marks"
-              :person/email      "fuckyou@fuckyou.com"}]
+              :person/name "mcattt"
+              :thing/name  "marks"
+              :thing/price      "fuckyou@fuckyou.com"}]
     @(d/transact conn (conj [] data))))
 
 
