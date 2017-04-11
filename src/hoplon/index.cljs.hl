@@ -5,14 +5,18 @@
 (rpc/get-random-user)
 
 (defc= user-info rpc/state)
+(defc= error rpc/error)
 
 (defc= record-id (get user-info :db/id))
 (defc= first-name (get user-info :person/name))
 (defc= last-name (get user-info :thing/name))
 (defc= emadd (get user-info :thing/price))
 
+(def disaster {:person/name "testinsideindexHL", :thing/name "insideHL", :thing/price 420})
+
 (def update! #(rpc/update-user {:db/id %1 :person/name %2 :thing/name %3}))
 (def insert! #(rpc/insert-user {:person/name %1 :thing/name %2 :thing/price %3}))
+(def insert-fixed! #(rpc/insert-fixed disaster))
 
 (html
   (head
@@ -23,7 +27,10 @@
     (p (text "bad"))
 
     (p :style "color:gray;font:14px Georgia;"
-       (text "(Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
+       (text " error: ~{error} (Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
+
+    (form :submit #(insert-fixed!)
+          (p (button :type "submit" "Insert fixed")))
 
     (p (text "INSERT the user record"))
 
@@ -37,4 +44,4 @@
           (input :type "text" :change #(reset! tname @%)))
         (p (label "Thing's price: ")
            (input :type "text" :change #(reset! tprice @%)))
-        (p (button :type "submit" "Update user information"))))))
+        (p (button :type "submit" "Insert user information"))))))

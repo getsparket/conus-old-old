@@ -35,3 +35,9 @@
   [user-data]
   (let [noop (println "Inserting with " user-data)]
     @(d/transact datomic-conn (conj [] user-data))))
+
+(defn insert-fixed!
+  "doo doo"
+  [user-data]
+  (let [noop (println "Inserting with " user-data)]
+    @(d/transact datomic-conn (conj [] user-data))))

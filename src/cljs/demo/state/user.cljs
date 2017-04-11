@@ -20,3 +20,6 @@
 
 (def insert-user
   (mkremote 'demo.api.user/insert-user state error loading))
+
+(def insert-fixed
+  (mkremote 'demo.api.user/insert-fixed state error loading))
