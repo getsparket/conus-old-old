@@ -31,12 +31,6 @@
   []
   (fetch-record (random-id)))
 
-(defn update-record!
-  "Update the record and change a property on the server to show that we also did something!"
-  [user-data]
-  (let [noop (println "Updating with " user-data)]
-   @(d/transact datomic-conn (conj [] user-data))))
-
 (defn insert-record!
   "doo doo"
   [user-data]
