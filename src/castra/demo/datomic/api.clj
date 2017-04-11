@@ -19,6 +19,13 @@
   (println "Fetching record for id:" id)
   (d/pull (d/db datomic-conn) '[:*] id))
 
+(defn fetch-all-things
+  []
+  (d/q '[:find  (pull ?e [*])
+         :where
+         [?e :person/name]]
+       (d/db datomic-conn)))
+
 (defn fetch-random-record
   "Use the pull API to fetch all attributes for a random ID"
   []

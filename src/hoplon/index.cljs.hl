@@ -3,7 +3,9 @@
         [demo.state.user :as rpc]))
 
 (rpc/get-random-user)
+(rpc/get-all-things)
 
+(defc= all-things rpc/has-all-things)
 (defc= user-info rpc/state)
 (defc= error rpc/error)
 
@@ -19,12 +21,12 @@
   (head
     (link :rel "stylesheet" :type "text/css" :href "main.css"))
   (body
-    (h1 (text "bad"))
+    (h1 (text "Cornus"))
 
-    (p (text "bad"))
+    (p (text "Cornus ~{all-things}"))
 
     (p :style "color:gray;font:14px Georgia;"
-       (text " error: ~{error} (Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
+       (text "(Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd} error: ~{error} "))
 
     (p (text "INSERT the user record"))
 
