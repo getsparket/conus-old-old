@@ -36,9 +36,3 @@
   (let [user-data-fixed (assoc user-data :thing/price (read-string (:thing/price user-data)))
         noop (println "Inserting with " user-data)]
     @(d/transact datomic-conn (conj [] user-data-fixed))))
-
-(defn insert-fixed!
-  "doo doo"
-  [user-data]
-  (let [noop (println "Inserting with " user-data)]
-    @(d/transact datomic-conn (conj [] user-data))))

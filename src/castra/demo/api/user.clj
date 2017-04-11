@@ -16,7 +16,3 @@
 (defrpc insert-user [user-data]
   {:rpc/pre [(insert-record! user-data)]}
   (fetch-random-record))
-
-(defrpc insert-fixed [user-data]
-  {:rpc/pre [(insert-fixed! user-data)]}
-  (fetch-random-record))
