@@ -25,19 +25,16 @@
     (p :style "color:gray;font:14px Georgia;"
        (text "(Id: ~{record-id}) First name: ~{first-name}, Last name: ~{last-name}, Email: ~{emadd}"))
 
-    (p (text "INSERT the user record, the data above will be updated and a new email is computed on the server"))
+    (p (text "INSERT the user record"))
 
-    (let [fname (cell "")
-          lname (cell "")
+    (let [uname (cell "")
+          tname (cell "")
           tprice (cell "")]
-      (form :submit #(insert! @fname @lname @tprice)  ; edit and submit form to load record
+      (form :submit #(insert! @uname @tname @tprice)  ; edit and submit form to load record
         (p (label "Your name: ")
-          (input :type "text" :value first-name :change #(reset! fname @%)))
+          (input :type "text" :change #(reset! uname @%)))
         (p (label "Thing's name: ")
-          (input :type "text" :value last-name :change #(reset! lname @%)))
+          (input :type "text" :change #(reset! tname @%)))
         (p (label "Thing's price: ")
-           (input :type "text" :value last-name :change #(reset! tprice @%)))
-        (p (button :type "submit" "Update user information"))))
-
-    (p :style "color:gray;font:12px Verdana;"
-       (text "There is no code to manage AJAX promises, responses from the server and DOM updates are just cells updates"))))
+           (input :type "text" :change #(reset! tprice @%)))
+        (p (button :type "submit" "Update user information"))))))

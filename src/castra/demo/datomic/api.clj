@@ -27,14 +27,11 @@
 (defn update-record!
   "Update the record and change a property on the server to show that we also did something!"
   [user-data]
-  (let [email (str (clojure.string/lower-case (:person/name user-data)) "."
-                   (clojure.string/lower-case (:thing/name user-data)) "@email-server.com")
-    data (assoc user-data :thing/price email)
-    noop (println "Updating with " data)]
-   @(d/transact datomic-conn (conj [] data))))
+  (let [noop (println "Updating with " user-data)]
+   @(d/transact datomic-conn (conj [] user-data))))
 
 (defn insert-record!
   "doo doo"
   [user-data]
-  (let [noop (println "Updating with " user-data)]
+  (let [noop (println "Inserting with " user-data)]
     @(d/transact datomic-conn (conj [] user-data))))

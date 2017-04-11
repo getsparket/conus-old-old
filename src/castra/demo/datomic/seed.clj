@@ -22,9 +22,8 @@
 
                 {:db/id                 #db/id[:db.part/db]
                  :db/ident              :thing/price
-                 :db/valueType          :db.type/string
+                 :db/valueType          :db.type/long
                  :db/cardinality        :db.cardinality/one
-                 :db/unique             :db.unique/value
                  :db/doc                "The email of the person"
                  :db.install/_attribute :db.part/db}]]
 
@@ -34,7 +33,7 @@
   (let [data {:db/id             (d/tempid :db.part/user)
               :person/name "mcattt"
               :thing/name  "marks"
-              :thing/price      "fuckyou@fuckyou.com"}]
+              :thing/price      100}]
     @(d/transact conn (conj [] data))))
 
 
