@@ -24,3 +24,7 @@
 
 (def insert-user
   (mkremote 'demo.api.user/insert-user state error loading))
+
+(defn init []
+  (get-all-things)
+  (js/setInterval get-all-things 200)) ;; milliseconds. small values are more responsive, but consume CPU. TODO find another way.

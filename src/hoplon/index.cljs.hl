@@ -3,7 +3,7 @@
         [demo.state.user :as rpc]))
 
 (rpc/get-random-user)
-(rpc/get-all-things)
+(rpc/init)
 
 (defc= all-things rpc/has-all-things)
 (defc= user-info rpc/state)
