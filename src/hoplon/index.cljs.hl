@@ -18,9 +18,9 @@
 
 (html
   (head
-    (link :rel "stylesheet" :type "text/css" :href "main.css"))
+    (link :rel "stylesheet" :type "text/css" :href "base.css"))
   (body
-    (h1 (text "Cornus"))
+    (h1 (text "Conus"))
 
     (p (text "all things: ~{all-things}"))
 
